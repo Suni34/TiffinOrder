@@ -1,0 +1,114 @@
+<app-search> </app-search>
+<ul>
+    <li *ngFor=" let breakfast of breakfasts ">
+        <a routerLink="/breakfast/{{breakfast.id}}">
+            <img [src]="breakfast.imageUrl" [alt]="breakfast.name">
+            <div class="content">
+                <div class="name">
+                    {{breakfast.name}}
+                </div>
+                <span class="favorite {{breakfast.favorite?'' :'not'}}">❤</span>
+                <div class="stars">
+                    <star-rating [value]="breakfast.stars" [totalstars]="5" [readonly]="true"
+                    checkedcolor ="red" uncheckedcolor="black" size= "22px"> </star-rating>
+                </div>
+                <div class="product-item-footer">
+                    <div class="origins">
+                        <span *ngFor="let origin of breakfast.origins">
+                            {{origin}}
+                        </span>
+                    </div>
+                    <div class="cook-time">
+                        <span>⏳</span>
+                        {{breakfast.cookTime}}
+                    </div>
+                    <div class="price">
+                        {{breakfast.price |currency}}
+                    </div>
+                </div>
+
+            </div>
+        </a>
+
+    </li>
+</ul>
+
+
+<!-- <app-not-found
+  [visible]="!food.id"
+  notFoundMessage="Food Not Found"
+  resetLinkText="Back To Homepage">
+</app-not-found> -->
+
+
+<!-- <div *ngIf="breakfast.id" class="container">
+  <img [src]="breakfast.imageUrl" [alt]="breakfast.name"/>
+
+  <div class="details">
+    <div class="header">
+      <span class="name">
+        {{breakfast.name}}
+      </span>
+      <span class="favorite {{breakfast.favorite? '': 'not'}}">❤</span>
+    </div>
+    <div class="rating">
+      <star-rating
+      [value]="breakfast.stars"
+      [totalstars]="5"
+      checkedcolor="red"
+      uncheckedcolor="black"
+      size="25px"
+      [readonly]="true">
+    </star-rating>
+    </div>
+
+    <div class="origins">
+      <span *ngFor="let origin of breakfast.origins">
+        {{origin}}
+      </span>
+    </div>
+
+    <div class="tags">
+      <a *ngFor="let tag of breakfast.tags" routerLink="/tag/{{tag}}">
+        {{tag}}
+      </a>
+    </div>
+
+    <div class="cook-time">
+      <span>
+        Time to cook about <strong>{{breakfast.cookTime}}</strong> minutes
+      </span>
+    </div>
+
+    <div class="price">
+      <span>
+        {{breakfast.price | currency}}
+      </span>
+    </div>
+
+    <button (click)="addToCart()">Add To Cart</button> 
+
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

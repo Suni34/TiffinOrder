@@ -1,0 +1,32 @@
+
+<h2>Vendor List</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>vendorId</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>FirmName</th>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Contact NUmber</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vendor of vendors">
+            <td>{{vendor.vendorId}}</td>
+            <td>{{vendor.password}}</td>
+            <td>{{vendor.name}}</td>
+            <td>{{vendor.firmName}}</td>
+            <td>{{vendor.status}}</td>
+            <td>{{vendor.location}}</td>
+            <td>{{vendor.contactNumber}}</td>
+
+            <td>
+                <!-- <button (click) ="updateComplaint(complaint.id)" class="btn btn-info">Update</button>-->                
+                <button (click) ="vendorDetails(vendor.vendorId)" class="btn btn-info" style="margin-left: 10px" >View</button> 
+                <button (click) ="deleteVendor(vendor.vendorId)" class="btn btn-danger" style="margin-left: 10px" >Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

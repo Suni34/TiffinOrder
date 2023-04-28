@@ -1,0 +1,27 @@
+
+nav{
+    background-color: rgb(147, 197, 201);
+    padding: 10PX;
+}
+.img{
+    align-items: center;
+
+}
+nav img{
+    width: 90px;
+}
+nav ul{
+    float:right;
+    list-style-type: none;
+}
+
+li a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    
+}
+p{
+    align-items: center;
+    margin-left: 35%;
+    margin-top: 2.5%;
+}

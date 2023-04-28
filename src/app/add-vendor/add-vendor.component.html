@@ -1,0 +1,81 @@
+
+<div class="col-md-6 offset-md-3">
+    <h3>Add Complaints</h3>
+    <form [formGroup]="form" (ngSubmit) = "onSubmit()" #localForm="ngForm">
+       
+        <div class="form-group">
+            <label>Vendor Id</label>
+            <input type="text" class="form-control" id="vendorId"
+              [(ngModel)] = "vendor.vendorId" name="vendorId"
+              formControlName="vendorId"
+              [class.is-invalid]="localForm.submitted && form.get('vendorId')?.invalid"
+              />
+              <div class="invalid-feedback">
+                  ProductId is required
+              </div>
+
+
+          </div>
+          <div class="form-group">
+            <label>Vendor Name</label>   
+            <input type="text" class="form-control" id="name"
+              [(ngModel)] = "vendor.name" name="name"
+              formControlName="name"
+              [class.is-invalid]="localForm.submitted && form.get('name')?.invalid"
+              />
+              <div class="invalid-feedback">
+                name is required
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" id="password"
+              [(ngModel)] = "vendor.password" name="password"
+              formControlName="password"
+              [class.is-invalid]="localForm.submitted && form.get('password')?.invalid"
+              />
+              <div class="invalid-feedback">
+                password is required
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>FirmName</label>
+            <input type="text" class="form-control" id="firmName"
+              [(ngModel)] = "vendor.firmName" name="firmName"
+              formControlName="firmName"
+              [class.is-invalid]="localForm.submitted && form.get('firmName')?.invalid"
+              />
+              <div class="invalid-feedback">
+                firmName is required
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control" id="location"
+              [(ngModel)] = "vendor.location" name="location"
+              formControlName="location"
+              [class.is-invalid]="localForm.submitted && form.get('location')?.invalid"
+              />
+              <div class="invalid-feedback">
+                location is required
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>contactNumber</label>
+            <input type="text" class="form-control" id="contactNumber"
+              [(ngModel)] = "vendor.contactNumber" name="contactNumber"
+              formControlName="contactNumber"
+              [class.is-invalid]="localForm.submitted && form.get('contactNumber')?.invalid"
+              />
+              <div class="invalid-feedback">
+                contactNumber is required
+              </div>
+          </div>
+
+          <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    </div>
