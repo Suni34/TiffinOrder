@@ -15,9 +15,12 @@ export class BreakfastService {
   //food search
   getAllBreakfastBySearch(search: string) {
     return this.getAll().filter(Breakfast => Breakfast.name.toLowerCase().includes(search.toLowerCase()))
-
-    // getBreakfastById(BreakfastId : string){
-    //   return this.getAll().find(breakfast => breakfast.id == breakfastId) ?? new Breakfast();
-    // }
   }
-}
+
+    getBreakfastById(breakfastId : string){
+     return this.getAll().find(breakfast => breakfast.id == breakfastId) ?? new Breakfast();
+    }
+  }
+    
+  
+  

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart } from '../cart';
-import { CartItem } from '../cart-item';
+
 import { CartService } from '../cart.service';
+import { CartItem } from '../cartitem';
 
 @Component({
   selector: 'app-cart',

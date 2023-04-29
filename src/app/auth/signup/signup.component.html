@@ -53,13 +53,13 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="SignIn" name="signin" formControlName="signin"
-                        [(ngModel)]="signin">
-                        <option *ngFor="let r of signinas" [value]="r">{{r}}</option>
+                    <select class="form-select" id="floatingSelect" aria-label="Role" name="role" formControlName="role"
+                        [(ngModel)]="role">
+                        <option *ngFor="let r of roles" [value]="r">{{r}}</option>
                     </select>
                     <label for="floatingSelect">Role</label>
-                    <div class="form-text text-danger" *ngIf="SignIn.errors?.['required'] && SignIn.touched">
-                        SignIn is required
+                    <div class="form-text text-danger" *ngIf="Role.errors?.['required'] && Role.touched">
+                        Role is required
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">

@@ -2,30 +2,33 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Breakfast } from './breakfast';
 import { Cart } from './cart';
-import { CartItem } from './cart-item';
+import { CartItem } from './cartitem';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cart: Cart = this.getCartFromLocalStorage();
+  private cart: Cart = new Cart();
   private cartSubject: BehaviorSubject<Cart> = new BehaviorSubject(this.cart);
   constructor() { }
 
   addToCart(breakfast: Breakfast): void {
     let cartItem = this.cart.items
-      .find(item => item.breakfast.id === breakfast.id);
+      .find(item => item.breakfast.id === breakfast.id)
     if (cartItem)
       return;
 
     this.cart.items.push(new CartItem(breakfast));
     this.setCartToLocalStorage();
+    
   }
 
   removeFromCart(breakfastId: string): void {
     this.cart.items = this.cart.items
       .filter(item => item.breakfast.id != breakfastId);
-    this.setCartToLocalStorage();
+      this.setCartToLocalStorage();
+    
   }
 
   changeQuantity(breakfastId: string, quantity: number) {

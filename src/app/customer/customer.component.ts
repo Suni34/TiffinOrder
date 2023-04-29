@@ -15,7 +15,7 @@ export class CustomerComponent implements OnInit {
   constructor(private api:BreakfastService , activatedRoute:ActivatedRoute){
     activatedRoute.params.subscribe((params)=>{
       if(params.search)
-      this.breakfasts=this.breakfastService.getAllBreakfastBySearch(params.search);
+      this.breakfasts=api.getAllBreakfastBySearch(params.search);
       else
     this.breakfasts = api.getAll();
     })

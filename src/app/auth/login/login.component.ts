@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/user';
 import { AuthService } from 'src/app/auth.service';
 
@@ -12,16 +12,16 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username : string = '';
-  password : string = '';
-  signin: string = '';
+  username: string = '';
+  password: string = '';
+  role: string = '';
 
-  user : User = new User();
+  user: User = new User();
 
-  signinas : string[];
+  roles: string[];
 
-  constructor(private authService : AuthService, private route : Router ) { 
-    this.signinas = [
+  constructor(private authService: AuthService, private route: Router) {
+    this.roles = [
       'admin',
       'vendor',
       'customer'
@@ -32,24 +32,24 @@ export class LoginComponent implements OnInit {
     this.username = '';
     this.password = '';
   }
-  loginForm:any = new FormGroup({
-    username: new FormControl("", [Validators.required,Validators.maxLength(100), Validators.pattern("[a-zA-Z0-9].*")]),
+  loginForm: any = new FormGroup({
+    username: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.pattern("[a-zA-Z0-9].*")]),
     password: new FormControl("", [Validators.required]),
-    signin: new FormControl("", [Validators.required]),
+    role: new FormControl("", [Validators.required]),
   })
-  loginSubmited(){
+  loginSubmited() {
     console.log(this.loginForm.get("username"));
   }
-  get UserName() : FormControl{
+  get UserName(): FormControl {
     return this.loginForm.get("username");
 
   }
-  get Password() : FormControl{
+  get Password(): FormControl {
     return this.loginForm.get("password");
 
   }
-  get SignIn() : FormControl{
-    return this.loginForm.get("signin");
+  get Role(): FormControl {
+    return this.loginForm.get("role");
 
   }
 
@@ -57,28 +57,27 @@ export class LoginComponent implements OnInit {
   login() {
     this.user.username = this.username;
     this.user.password = this.password;
-    this.user.signin = this.signin;
+    this.user.role = this.role;
 
     this.authService.login(this.user).subscribe(res => {
 
-      if(res == null) {
+      if (res == null) {
         alert("Username or password is wrong");
         this.ngOnInit();
-      }else {
+      } else {
         console.log("Login successful");
-        // localStorage.setItem("token",res.token);
+        localStorage.setItem("token", res.token);
 
-        if(this.signin == 'admin') {
+        if (this.role == 'admin') {
           this.route.navigate(['/admin']);
-        } 
+        }
 
-        if( this.signin == 'vendor') {
+        if (this.role == 'vendor') {
           this.route.navigate(['/vendor']);
         }
-        if(this.signin == 'customer') {
+        if (this.role == 'customer') {
           this.route.navigate(['/customer']);
-        } 
-
+        }
 
       }
 

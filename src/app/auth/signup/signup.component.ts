@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/user';
 import { AuthService } from 'src/app/auth.service';
 
@@ -12,17 +12,18 @@ import { AuthService } from 'src/app/auth.service';
 })
 
 export class SignupComponent implements OnInit {
-  
-  name : string = '';
-  username : string = '';
-  password : string = '';
-  signin: string='';
 
-  user : User = new User();
-  signinas : string[];
+  name: string = '';
+  username: string = '';
+  password: string = '';
+  role: string = '';
 
-  constructor( private authService : AuthService, private route : Router) { 
-    this.signinas = [
+  user: User = new User();
+  roles: string[];
+
+  constructor(private authService: AuthService, private route: Router) {
+    this.roles = [
+      'admin',
       'vendor',
       'customer'
     ]
@@ -34,49 +35,45 @@ export class SignupComponent implements OnInit {
     this.password = '';
     this.name = '';
   }
-  signupForm:any = new FormGroup({
+  signupForm: any = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.pattern("[A-Za-z].*")]),
     username: new FormControl("", [Validators.required, Validators.email]),
-    password: new FormControl("", [Validators.required,Validators.minLength(5),Validators.maxLength(8)]),
-    signin: new FormControl("", [Validators.required])
+    password: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(8)]),
+    role: new FormControl("", [Validators.required])
 
-    
+
   });
-  signupSubmited(){
+  signupSubmited() {
     console.log(this.signupForm.get("name"));
   }
-  get FullName() : FormControl{
+  get FullName(): FormControl {
     return this.signupForm.get("name");
 
   }
-  get EmailId() : FormControl{
+  get EmailId(): FormControl {
     return this.signupForm.get("username");
 
   }
-  get Password() : FormControl{
+  get Password(): FormControl {
     return this.signupForm.get("password");
 
   }
-  get SignIn() : FormControl{
-    return this.signupForm.get("signin");
+  get Role(): FormControl {
+    return this.signupForm.get("role");
 
   }
-
-
-
-
   signup() {
 
     this.user.username = this.username;
     this.user.password = this.password;
     this.user.name = this.name;
-    this.user.signin = this.signin;
+    this.user.role = this.role;
 
     this.authService.signUp(this.user).subscribe(res => {
-      if(res == null) {
+      if (res == null) {
         alert("Registration failed");
         this.ngOnInit();
-      }else {
+      } else {
         console.log("Registration successful");
         alert("Registration successful");
         this.route.navigate(['/']);
@@ -88,4 +85,3 @@ export class SignupComponent implements OnInit {
 
   }
 }
-
