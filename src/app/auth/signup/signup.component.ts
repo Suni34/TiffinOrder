@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/user';
-import { AuthService } from 'src/app/auth.service';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -69,19 +69,30 @@ export class SignupComponent implements OnInit {
     this.user.name = this.name;
     this.user.role = this.role;
 
-    this.authService.signUp(this.user).subscribe(res => {
-      if (res == null) {
-        alert("Registration failed");
-        this.ngOnInit();
-      } else {
-        console.log("Registration successful");
-        alert("Registration successful");
-        this.route.navigate(['/']);
-      }
-    }, err => {
-      alert("Registration failed.");
+    // this.authService.signUp(this.user).subscribe(res => {
+    //   if (res == null) {
+    //     alert("Registration failed");
+    //     this.ngOnInit();
+    //   } else {
+    //     console.log("Registration successful");
+    //     alert("Registration successful");
+    //     this.route.navigate(['/']);
+    //   }
+    // }, err => {
+    //   alert("Registration failed.");
+    //   this.ngOnInit();
+    // })
+    if (this.role == null) {
+      alert("Registration failed");
       this.ngOnInit();
-    })
+    }
+    else {
+      console.log("Registration Successful");
+      alert("Registration successful");
+      this.route.navigate(['/']);
+    }
 
+    
   }
+
 }

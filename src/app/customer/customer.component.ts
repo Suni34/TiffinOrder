@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Breakfast } from '../breakfast';
-import { BreakfastService } from '../breakfast.service';
+import { Observable } from 'rxjs';
+import { Breakfast } from '../models/breakfast';
+import { BreakfastService } from '../services/breakfast.service';
 
 @Component({
   selector: 'app-customer',
@@ -10,21 +11,25 @@ import { BreakfastService } from '../breakfast.service';
 })
 
 export class CustomerComponent implements OnInit {
-   breakfasts:Breakfast[] = [];
+  breakfasts: Breakfast[] = [];
   breakfastService: any;
-  constructor(private api:BreakfastService , activatedRoute:ActivatedRoute){
-    activatedRoute.params.subscribe((params)=>{
-      if(params.search)
-      this.breakfasts=api.getAllBreakfastBySearch(params.search);
+  constructor(private api: BreakfastService, activatedRoute: ActivatedRoute) {
+    let breakfastObservable: Observable<Breakfast[]>
+    activatedRoute.params.subscribe((params) => {
+      if (params.searchItem)
+        breakfastObservable = this.api.getAllBreakfastBySearchItem(params.search);
       else
-    this.breakfasts = api.getAll();
+        breakfastObservable = api.getAll();
+        breakfastObservable.subscribe((serverFoods)=>{
+          this.breakfasts = serverFoods;
+        })
     })
   }
   ngOnInit() {
-    
+
   }
-  
-  
+
+
 }
 
 

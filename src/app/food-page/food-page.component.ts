@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Breakfast } from '../breakfast';
-import { BreakfastService } from '../breakfast.service';
-import { CartService } from '../cart.service';
+import { Breakfast } from '../models/breakfast';
+import { BreakfastService } from '../services/breakfast.service';
+import { CartService } from '../services/cart.service';
+
 
 @Component({
   selector: 'app-food-page',
@@ -14,7 +15,9 @@ export class FoodPageComponent implements OnInit {
   constructor(activatedRoute: ActivatedRoute, private api:BreakfastService , private cartService: CartService, private router:Router){
     activatedRoute.params.subscribe((params)=>{
       if(params.id)
-      this.breakfast =api.getBreakfastById(params.id)
+      api.getBreakfastById(params.id).subscribe(serverFood=>{
+        this.breakfast = serverFood;
+      })
     })
   }
 

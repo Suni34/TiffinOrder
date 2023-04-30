@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/user';
-import { AuthService } from 'src/app/auth.service';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -15,9 +15,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   role: string = '';
-
   user: User = new User();
-
   roles: string[];
 
   constructor(private authService: AuthService, private route: Router) {
@@ -52,39 +50,38 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get("role");
 
   }
-
-
   login() {
     this.user.username = this.username;
     this.user.password = this.password;
     this.user.role = this.role;
 
-    this.authService.login(this.user).subscribe(res => {
+    // this.authService.login(this.user).subscribe(res => {
 
-      if (res == null) {
-        alert("Username or password is wrong");
-        this.ngOnInit();
-      } else {
-        console.log("Login successful");
-        localStorage.setItem("token", res.token);
+    // if (res == null) {
+    //   alert("Username or password is wrong");
+    //   this.ngOnInit();
+    // } else {
+    //   console.log("Login successful");
+    //   localStorage.setItem("token", res.token);
 
-        if (this.role == 'admin') {
-          this.route.navigate(['/admin']);
-        }
-
-        if (this.role == 'vendor') {
-          this.route.navigate(['/vendor']);
-        }
-        if (this.role == 'customer') {
-          this.route.navigate(['/customer']);
-        }
-
-      }
-
-    }, err => {
-      alert("Login failed");
+    if (this.role == null) {
+      alert("UserName or Password is wrong");
       this.ngOnInit();
-    })
-  }
+    }
+    else {
+      console.log("Login Successful");
+    }
 
+    if (this.role == 'admin') {
+      this.route.navigate(['/vendor']);
+    }
+
+    if (this.role == 'vendor') {
+      this.route.navigate(['/vendor']);
+    }
+    if (this.role == 'customer') {
+      this.route.navigate(['/customer']);
+    }
+
+  }
 }

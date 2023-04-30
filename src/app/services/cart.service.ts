@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Breakfast } from './breakfast';
-import { Cart } from './cart';
-import { CartItem } from './cartitem';
+import { Breakfast } from '../models/breakfast';
+import { Cart } from '../models/cart';
+import { CartItem } from '../models/cartitem';
 
 
 @Injectable({
@@ -21,14 +21,14 @@ export class CartService {
 
     this.cart.items.push(new CartItem(breakfast));
     this.setCartToLocalStorage();
-    
+
   }
 
   removeFromCart(breakfastId: string): void {
     this.cart.items = this.cart.items
       .filter(item => item.breakfast.id != breakfastId);
-      this.setCartToLocalStorage();
-    
+    this.setCartToLocalStorage();
+
   }
 
   changeQuantity(breakfastId: string, quantity: number) {

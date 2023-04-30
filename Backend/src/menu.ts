@@ -1,6 +1,6 @@
-import { Breakfast } from "./breakfast";
 
-export const sample:Breakfast[] = [
+
+export const sample:any[] = [
     {
         id :'1',
         name:'Idly',
